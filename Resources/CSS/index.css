@@ -1,0 +1,33 @@
+section {
+    margin: 50px;
+}
+
+h4 {
+    margin-left: 20px;
+    text-decoration: underline;
+}
+
+.riskColorHigh {
+    background-color: hsla(0, 86%, 69%, 0.3) ; 
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.riskColorModerate {
+    background-color: hsla(61, 91%, 65%, 0.3) ; 
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.riskColorLow {
+    background-color: hsla(101, 91%, 61%, 0.3) ; 
+    padding: 3px;
+    border-radius: 5px;
+}
+
+a {
+    font-size: small;
+}
+
+
+
