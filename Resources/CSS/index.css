@@ -1,3 +1,19 @@
+/* Global CSS */
+
+.visible {
+    display: flexbox;
+}
+
+.hidden {
+    display: none;
+}
+
+.selected {
+    background-color: lightblue;
+}
+
+/* End of Global CSS */
+
 section {
     margin: 50px;
 }
@@ -28,6 +44,25 @@ h4 {
 a {
     font-size: small;
 }
+
+.medicationlistitem {
+    list-style-type: none;
+    border: solid black 1px;
+    border-radius: 5px;
+    box-shadow: darkgray 1px 1px;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    text-align: center;
+    margin: auto;
+    padding: 3px;
+}
+
+.medicationdiv {
+    display: inline-flex;
+    text-align: center;
+}
+
 
 
 

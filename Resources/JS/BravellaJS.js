@@ -282,13 +282,14 @@ function calculateFramingham(e) {
                 framinghamScoreOutput.innerHTML =`greater than or equal to ${riskPercentage}%`
             }
         console.log(`riskPercentage =${riskPercentage}`)
+
         if (riskPercentage <=9 ) {
             CVDRiskEstimate.innerHTML ="Low";
             CVDRiskEstimate.classList.add('riskColorLow');
             CVDRiskEstimate.classList.remove('riskColorModerate');
             CVDRiskEstimate.classList.remove('riskColorHigh');
-            if (patientLDL.value <= 5.0  && patientApoB.value < 1.45 && !CholCheckBox.checked && GFRinput.value > 60) {
-                targetLDLSpan.innerHTML = " Current LDL is less than or equal to 5.0 mmol/L, the ApoB is less than 1.45 g/L, and the patient does not have CKD. No treatment required" ;
+            if (patientLDL.value <= 5.0  && patientApoB.value < 1.45 && !CholCheckBox.checked) {
+                targetLDLSpan.innerHTML = " Current LDL is less than or equal to 5.0 mmol/L, the ApoB is less than 1.45 g/L. No treatment required" ; //Consider adding GFR criteria... without breaking the function: && GFRinput.value > 60 && !GFRinput.value !==''
                 currentLDLSpan.classList.remove('riskColorHigh');
                 currentLDLSpan.classList.remove('riskColorLow');
             } else {
@@ -301,14 +302,15 @@ function calculateFramingham(e) {
                     currentLDLSpan.classList.add('riskColorHigh');
                     currentLDLSpan.classList.remove('riskColorLow');
                 }
-            }            
+            }  
+
         } else if (riskPercentage > 10 && riskPercentage <= 19) {
             CVDRiskEstimate.innerHTML ="Moderate";
             CVDRiskEstimate.classList.add('riskColorModerate');
             CVDRiskEstimate.classList.remove('riskColorLow');
             CVDRiskEstimate.classList.remove('riskColorHigh');
-            if (patientLDL.value <= 3.5 && patientApoB.value < 1.05 && !CholCheckBox.checked && GFRinput.value > 60) {
-                targetLDLSpan.innerHTML = " Current LDL is less than or equal to 3.5 mmol/L, the ApoB is less than 1.05 g/L, and the patient does not have CKD. No treatment required"
+            if (patientLDL.value <= 3.5 && patientApoB.value < 1.05 && !CholCheckBox.checked) {
+                targetLDLSpan.innerHTML = " Current LDL is less than or equal to 3.5 mmol/L, the ApoB is less than 1.05 g/L. No treatment required"
                 currentLDLSpan.classList.remove('riskColorHigh');
                 currentLDLSpan.classList.remove('riskColorLow');  
             } else {
@@ -423,6 +425,74 @@ function calculateBPValues(e) {
 
 };
 };
+
+// Diabetes checkbox trigger
+
+A1CInput = document.getElementById('A1C');
+
+A1CInput.addEventListener('change', updateDMCheckBox);
+
+function updateDMCheckBox(e) {
+    e.preventDefault();
+    if (A1CInput.value >= 6.5) {
+        DMCheckbox.checked = true;
+    }
+}
+
+//Medication Section CSS and Display Logic
+
+antihypertensiveList = document.getElementById('antihypertensivelist');
+antihypertensiveListButton = document.getElementById('antihtbutton');
+medicationListItem = document.getElementsByClassName('medicationlistitem');
+for (i=0; i<medicationListItem.length; i++) {
+    medicationListItem[i].addEventListener('click', toggleSelectedStatus)
+};
+
+function toggleSelectedStatus(e) {
+    e.preventDefault()
+    e.target.classList.toggle('selected');
+}
+
+
+antihypertensiveListButton.onclick = () => {
+    antihypertensiveList.classList.toggle('visible');
+    antihypertensiveList.classList.toggle('hidden');
+}
+
+antiDMlist = document.getElementById('antidmlist');
+antiDMListButton = document.getElementById('antidmbutton');
+
+antiDMListButton.onclick = () => {
+    antiDMlist.classList.toggle('visible');
+    antiDMlist.classList.toggle('hidden');
+}
+
+antiDlplist = document.getElementById('antidlplist');
+antiDlpListButton = document.getElementById('antidlpbutton');
+
+antiDlpListButton.onclick = () => {
+    antiDlplist.classList.toggle('visible');
+    antiDlplist.classList.toggle('hidden'); 
+}
+
+antiSmokinglist = document.getElementById('antismokinglist');
+antiSmokingListButton = document.getElementById('antismokingbutton');
+
+antiSmokingListButton.onclick = () => {
+    antiSmokinglist.classList.toggle('visible');
+    antiSmokinglist.classList.toggle('hidden'); 
+}
+
+antiPlateletlist = document.getElementById('antiplateletlist');
+antiPlateletListButton = document.getElementById('antiplateletbutton');
+
+antiPlateletListButton.onclick = () => {
+    antiPlateletlist.classList.toggle('visible');
+    antiPlateletlist.classList.toggle('hidden'); 
+}
+
+
+
 
 
 
