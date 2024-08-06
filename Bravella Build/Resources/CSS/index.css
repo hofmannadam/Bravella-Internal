@@ -1,0 +1,68 @@
+/* Global CSS */
+
+.visible {
+    display: flexbox;
+}
+
+.hidden {
+    display: none;
+}
+
+.selected {
+    background-color: lightblue;
+}
+
+/* End of Global CSS */
+
+section {
+    margin: 50px;
+}
+
+h4 {
+    margin-left: 20px;
+    text-decoration: underline;
+}
+
+.riskColorHigh {
+    background-color: hsla(0, 86%, 69%, 0.3) ; 
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.riskColorModerate {
+    background-color: hsla(61, 91%, 65%, 0.3) ; 
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.riskColorLow {
+    background-color: hsla(101, 91%, 61%, 0.3) ; 
+    padding: 3px;
+    border-radius: 5px;
+}
+
+a {
+    font-size: small;
+}
+
+.medicationlistitem {
+    list-style-type: none;
+    border: solid black 1px;
+    border-radius: 5px;
+    box-shadow: darkgray 1px 1px;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    text-align: center;
+    margin: auto;
+    padding: 3px;
+}
+
+.medicationdiv {
+    display: inline-flex;
+    text-align: center;
+}
+
+
+
+
