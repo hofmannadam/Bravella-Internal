@@ -4,167 +4,20 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="./Resources/CSS/index.css" type="text/css" rel="stylesheet">
-        <title>Bravella Health Internal</title>
+        <title>Bravella Health App Landing Page</title>
     </head>
     <body>
         <header>
-            <h1>Example Internal-Facing Patient Worksheet</h1>
-            <h2>Cardiovascular Health Screen and Algorithm</h2>
+            <h1>Bravella Health Algorithms</h1>
+            <h2>Welcome, USERNAME</h2>
         </header>
-            <section id="patientidentification">
-
-            </section>
-            <section id="dataacquisition">
-                <h3>Patient Identification</h3>
-                <form>
-                    <label for="patientfirstname">First Name:</label>
-                    <input type="text" id="patientfirstname" name="patientfirstname"/><br>
-                    <label for="patientlastname">Last Name:</label>
-                    <input type="text" id="patientlastname" name="patientlastname"/><br>
-                    <label for="DOB">Date of Birth:</label>
-                    <input type="date" id="DOB" name="DOB"/><br>
-                    <label for="patientage">Age:</label>
-                    <input type="number" id="patientage" name="patientage" min="0" max="120" class="framinghamcalc"/><br>
-                    <label for="patientsex">Sex:</label>
-                    <input type="radio" id="patientsexfemale" name="patientsex" checked class="framinghamcalc" /> F <input type="radio" id="patientsexmale" name="patientsex" class="framinghamcalc"  /> M  <br>
-                    <label for="uniqueid">Unique ID:</label>
-                    <input type="text" id="uniqueid" name="uniqueid"/><br>
-                    <button id="patientidsubmission">Submit</button>
-                </form>
-                <br>
-                <h3>Patient Data</h3>
-                <h4>Past Medical History</h4>
-                <label for="CVD">Personal history of stroke, MI, peripheral vascular disease or angioplasty/bypass?</label>
-                <input type="checkbox" id="CVD" name="CVD" class="framinghamcalc" /> <br>
-                <label for="DM">Personal history of diabetes?</label>
-                <input type="checkbox" id="DM" name="DM" class="framinghamcalc"  /> <br>
-                <h4>Allergies and Medications</h4>
-                <label for="allergies">Allergies:</label>
-                <input type="text" id="allergies" name="allergies"/><br>
-                <label for="medications">Medications:</label>
-                <input type="text" id="medications" name="medications"/><br>
-                <div id="antihtndiv" class="medicationdiv">
-                    <button id="antihtbutton" class="medicationlistitem">Antihypertensives</button>
-                    <ul id="antihypertensivelist" class="hidden" >
-                        <li class="medicationlistitem" id="diuretics">Diuretics</li>
-                        <li class="medicationlistitem" id="ACEi">ACE Inhibitors</li>
-                        <li class="medicationlistitem" id="ARB">Angiotensin Receptor Blockers</li>
-                        <li class="medicationlistitem" id="Betablockers">Beta-blockers</li>
-                        <li class="medicationlistitem" id="Calciumchannelblockers">Calcium-channel blockers</li>
-                        <li class="medicationlistitem" id="Vasodilators">Vasodilators and Nitrates</li>
-                    </ul>
-                </div>
-                <div id="dmmeddiv" class="medicationdiv">
-                    <button id="antidmbutton" class="medicationlistitem">Anti-diabetic Rx</button>
-                    <ul id="antidmlist" class="hidden" >
-                        <li class="medicationlistitem" id="sulfonyureas">Sulfonyureas</li>
-                        <li class="medicationlistitem" id="metformin">Metformin</li>
-                        <li class="medicationlistitem" id="SGLT2">SGLT2</li>
-                        <li class="medicationlistitem" id="Meglitinides">Meglitinides</li>
-                        <li class="medicationlistitem" id="Glitazones">Glitazones</li>
-                        <li class="medicationlistitem" id="Insulins">Insulins</li>
-                    </ul>
-                </div>
-                <div id="dlpmeddiv" class="medicationdiv">
-                    <button id="antidlpbutton" class="medicationlistitem">Dyslipidemia Rx</button>
-                    <ul id="antidlplist" class="hidden" >
-                        <li class="medicationlistitem" id="statins">Statins</li>
-                        <li class="medicationlistitem" id="bileacidsequestrants">Bile-Acid Sequestrants</li>
-                        <li class="medicationlistitem" id="Ezetimibe">Ezetimibe</li>
-                        <li class="medicationlistitem" id="PCSK9">PCSK9</li>
-                        <li class="medicationlistitem" id="Niacin">Niacin</li>
-                        <li class="medicationlistitem" id="Fibrates">Fibrates</li>
-                    </ul>
-                </div>
-                <div id="smokingmeddiv" class="medicationdiv">
-                    <button id="antismokingbutton" class="medicationlistitem">Smoking Cessation</button>
-                    <ul id="antismokinglist" class="hidden" >
-                        <li class="medicationlistitem" id="nicotine">Nicotine Replacement</li>
-                        <li class="medicationlistitem" id="Bupropion">Bupropion</li>
-                        <li class="medicationlistitem" id="Varenicline">Varenicline</li>
-                    </ul>
-                </div>
-                <div id="antiplateletmeddiv" class="medicationdiv">
-                    <button id="antiplateletbutton" class="medicationlistitem">Antiplatelet Rx</button>
-                    <ul id="antiplateletlist" class="hidden" >
-                        <li class="medicationlistitem" id="ASA">Aspirin</li>
-                        <li class="medicationlistitem" id="Clopidogrel">Clopidogrel</li>
-                        <li class="medicationlistitem" id="Prasugrel">Prasugrel</li>
-                        <li class="medicationlistitem" id="Ticagrelor">Ticagrelor</li>
-                        <li class="medicationlistitem" id="Dipyridamole">Dipyridamole</li>
-                    </ul>
-                </div>
-                <br>
-                <input type="checkbox" id="takingbpmeds" class="framinghamcalc" /> Taking Antihypertensives? <br>
-                <input type="checkbox" id="takingcholmeds" class="framinghamcalc" /> Taking Cholesterol-lowering medications? <br>
-                <br>
-                <h4>Physical and Historical Data</h4>
-                <label for="SBP">SBP:</label>
-                <input type="number" id="SBP" name="SBP" class="framinghamcalc BPinput"/>
-                <label for="DBP">DBP:</label>
-                <input type="number" id="DBP" name="DBP" class="BPinput"/>
-                <label for="pulse">Pulse:</label>
-                <input type="number" id="pulse" name="pulse" class="BPinput"/><br>
-                <label for="weight">Weight:</label>
-                <input type="number" id="weight" name="weight" class="bmiinput"/> kg <button id="convertlbs" class="bmiinput">Convert lbs to kg</button> <br>
-                <label for="height">Height:</label>
-                <input type="number" id="height" name="height" class="bmiinput"/> cm <button id="convertin" class="bmiinput">Convert in to cm</button> <br>
-                <p>BMI: <span id="bmicalc"></span></p> <p>Obesity Class: <span id="obesityclasscalc"></span></p> <br>
-                <input type="checkbox" id="smoking" class="framinghamcalc" /> Active Smoker?
-                <h4>Biochemical and Imaging Data</h4>
-                <label for="LDL">LDL:</label>
-                <input type="number" id="LDL" name="LDL" class="framinghamcalc"/> mmol/L <br>
-                <label for="HDL">HDL:</label>
-                <input type="number" id="HDL" name="HDL" class="framinghamcalc"/> mmol/L <br>
-                <label for="totalchol">Total Cholesterol:</label>
-                <input type="number" id="totalchol" name="totalchol" class="framinghamcalc"/> mmol/L <br>
-                <label for="ApoB">Apolipoprotein B (ApoB):</label>
-                <input type="number" id="ApoB" name="ApoB" class="framinghamcalc"/> g/L <br>
-                <label for="ApoB">Triglycerides:</label>
-                <input type="number" id="TG" name="TG" class="framinghamcalc"/> mmol/L <br>
-
-                <label for="ApoB">Creatinine:</label>
-                <input type="number" id="Creat" name="Creat" class="framinghamcalc"/> umol/L
-                <label for="ApoB">eGFR (CKD-Epi 2021):</label>
-                <input type="number" id="GFR" name="GFR" class="framinghamcalc"/> ml/min  <br>
-
-                <label for="A1C">HbA1C:</label>
-                <input type="number" id="A1C" name="A1C" class="framinghamcalc"/> %
-
-
-            </section>
-            <section id="dataanalysis">
-                <h3>Clinical Data Analysis</h3>
-                <h4>Framingham CVD Risk Calculator (only set up for F patients currently)</h4>
-                <a href="https://www.ahajournals.org/doi/10.1161/01.cir.97.18.1837?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed" target="_blank">FRS Calculator Reference</a>
-                <p>Framingham 10 year CVD Risk Estimate: <span id="framinghamscore"></span></p>
-                <p>Risk Category: <span id="CVDriskcategory"></span></p>
-
-                <h4>Blood Pressure Management</h4>
-                <a href="https://hypertension.ca/guidelines/">Hypertension Canada Guidelines</a>
-                <p>Current BP: <span id="currentSBP"></span>/<span id="currentDBP"></span> Pulse: <span id="currentpulse"></span></p>
-                <p>Target BP: <span id="targetSBP"></span>/<span id="targetDBP"></span><br> Explanation: <span id="targetBPExplanation"></span></p>
-
-                <h4>Cholesterol Management</h4>
-                <a href="https://onlinecjc.ca/article/S0828-282X(21)00165-3/fulltext#seccesectitle0005" target="_blank">CCS 2021 Guidelines</a>
-                <p>Current LDL Cholesterol:<span id="currentLDL"></span></p>
-                <p>Target LDL Cholesterol:<span id="targetLDL"></span></p>
-
-                <h4>Smoking Management</h4>
-
-                <h4>Antiplatelet Management</h4>
-                
-
-            </section>
-            <section id="therapeutic">
-                <h4></h4>
-            
-            </section>
         <main>
-
+            <a href="./hrt.html"><button>Menopause HRT Intake</button></a>
+            <a href="./cvd.html"><button>Cardiovascular and Metabolic</button></a>
+            <a href="./osteoporosis.html"><button>Osteoporosis and Bone Health</button></a>
         </main>
-        <Footer>
-            <script type="text/javascript" src="Resources/JS/BravellaJS.js"></script>
-        </Footer>
+        <footer>
+            <script type="module/text/javascript" src="./Resources/JS/index.js"></script>
+        </footer>
     </body>
-</html>
+

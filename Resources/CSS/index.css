@@ -1,5 +1,9 @@
 /* Global CSS */
 
+html {
+    print-color-adjust: exact;
+}
+
 .visible {
     display: flexbox;
 }
@@ -12,10 +16,35 @@
     background-color: lightblue;
 }
 
+section {
+    border: solid 1px black;
+}
+
+.selectedoption {
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px black;
+    cursor: pointer;
+}
+
+.unselectedoption {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 1px 1px lightgray;
+    text-decoration: line-through;
+    color: lightgray;
+    cursor: pointer;
+}
+
+.firstorderdropdown {
+    margin-left: 20px;
+}
+
 /* End of Global CSS */
 
 section {
     margin: 50px;
+    padding: 5px;
 }
 
 h4 {
@@ -64,5 +93,26 @@ a {
 }
 
 
+.addli {
+    list-style-type: none;
+    margin: 1px;
+}
 
+.removeli {
+    margin-left: 5px;
+    border: black solid 1px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: red;
+    box-shadow: lightgrey 1px 1px;
+}
 
+.Rxselectoroption {
+    margin-right: 3px;
+}
+
+.rightfloat {
+    display: inline;
+    float:inline-end;
+    border: 1px solid black;
+}

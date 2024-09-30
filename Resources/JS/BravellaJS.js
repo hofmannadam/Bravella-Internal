@@ -1,5 +1,76 @@
 // Bravella Health Example Site JS Algos
 
+import medication from './Supporting JS/Pharmacopoeia.js';
+import {ramipril, perindopril, trandolapril, enalapril, benazepril, captopril, quinapril, fosinopril } from './Supporting JS/ACEinhibitors.js';
+import {candesartan, irbesartan, losartan, olmesartan, valsartan }  from './Supporting JS/ARBs.js';
+import { hctz, furosemide, spironolactone, amiloride, eplerenone } from './Supporting JS/diuretics.js';
+import {metoprolol, bisoprolol, acebutolol, carvedilol, labetalol, atenolol, nadolol, propanolol  } from './Supporting JS/betablockers.js';
+import {amlodipine, diltiazem, felodipine, nifedipine, verapamil } from './Supporting JS/CCBs.js';
+
+//Home BP functions - add line and calculate average values to 0 decimals
+
+const addHomeBPButton = document.getElementById('addhomebpbutton');
+const homeBPDiv = document.getElementById('avghomebp');
+const calculateAvgBP = document.getElementById('calculateavgbp');
+const avgHomeSBP = document.getElementById('avgsbp');
+const avgHomeDBP = document.getElementById('avgdbp');
+const avgHomePulse = document.getElementById('avgpulse');
+
+addHomeBPButton.addEventListener('click', addHomeBPLine);
+
+let BPiteration = 0;
+function addHomeBPLine(e) {
+    e.preventDefault();
+    let line = `
+                <label>SBP:</label>
+                <input type="number" id="SBP${BPiteration}" name="SBP"/>
+                <label>DBP:</label>
+                <input type="number" id="DBP${BPiteration}" name="DBP"/>
+                <label for="pulse">Pulse:</label>
+                <input type="number" id="pulse${BPiteration}" name="pulse"/><br>
+                `
+    homeBPDiv.appendChild(document.createElement('p')).innerHTML = line;
+    BPiteration ++
+    console.log(`Iteration number: ${BPiteration}`)
+    return BPiteration;
+}
+
+calculateAvgBP.addEventListener('click', calculateAvgBPValues);
+
+function calculateAvgBPValues(e) {
+    e.preventDefault();
+    calculateAvgBP.removeEventListener('click', calculateAvgBPValues);
+    let avgSBP, totalSBP = 0;
+    let avgDBP, totalDBP = 0;
+    let avgPulse, totalPulse = 0;
+
+    for (let i=0; i<BPiteration; i++) {
+        let SBPvalue = document.getElementById(`SBP${i}`).valueAsNumber;
+        if (SBPvalue) {totalSBP += SBPvalue}
+          else {homeBPDiv.appendChild(document.createElement('p')).innerHTML = `<strong>A critical value is missing!</strong>`;}
+        console.log(`Total SBP = ${totalSBP}`);
+        let DBPvalue = document.getElementById(`DBP${i}`).valueAsNumber;
+        if (DBPvalue) {totalDBP += DBPvalue}
+        else {homeBPDiv.appendChild(document.createElement('p')).innerHTML = `<strong>A critical value is missing!</strong>`;}
+        console.log(`Total DBP = ${totalDBP}`);
+        let pulseValue = document.getElementById(`pulse${i}`).valueAsNumber;
+        if (pulseValue) {totalPulse += pulseValue}
+        else {homeBPDiv.appendChild(document.createElement('p')).innerHTML = `<strong>A critical value is missing!</strong>`;}
+        console.log(`Total pulse = ${totalPulse}`);
+    }
+    console.log('BP iteration is = ' + BPiteration);
+    avgSBP = totalSBP/BPiteration;
+    avgDBP = totalDBP/BPiteration;
+    avgPulse = totalPulse/BPiteration;
+    console.log(`Average = ${avgSBP}/${avgDBP} ${avgPulse} `)
+    avgHomeSBP.innerHTML = avgSBP.toFixed(0);
+    avgHomeDBP.innerHTML = avgDBP.toFixed(0);
+    avgHomePulse.innerHTML = avgPulse.toFixed(0);
+    patientSBP.value = avgSBP.toFixed(0);
+    patientDBP.value = avgDBP.toFixed(0);
+    patientPulse.value = avgPulse.toFixed(0);
+}
+
 
 //BMI and Obesity Class calculator
 
@@ -9,7 +80,7 @@ const BMIInputSpan = document.getElementById('bmicalc');
 const obesityClassSpan = document.getElementById('obesityclasscalc');
 
 const BMIInputEventTargets = document.getElementsByClassName('bmiinput');
-for (i=0; i<BMIInputEventTargets.length; i++) {
+for (let i=0; i<BMIInputEventTargets.length; i++) {
     BMIInputEventTargets[i].addEventListener('change', calculateBMI);
 };
 
@@ -60,6 +131,47 @@ function convertHeight(e) {
     calculateBMI(e);
 };
 
+//Smoking data subsection toggle and analysis functions
+
+const numberCigs = document.getElementById('cigsperday');
+const numberPacks = document.getElementById('packsperday');
+const ageStartedSmoking = document.getElementById('agestartsmoking');
+const yearsSpentSmoking = document.getElementById('yearssmoking');
+const smokingPackYearsP = document.getElementById('smokingpackyears');
+
+numberCigs.addEventListener('change', calculatePackYears);
+numberPacks.addEventListener('change', calculatePackYears);
+ageStartedSmoking.addEventListener('change', calculatePackYears);
+yearsSpentSmoking.addEventListener('change', calculatePackYears);
+
+function calculatePackYears(e) {
+   if (numberCigs.valueAsNumber) {
+    numberPacks.value = (numberCigs.value/25).toFixed(1);
+   } else if (numberPacks.valueAsNumber) {
+    numberCigs.value = (numberPacks.value*25).toFixed(0);
+   }
+//    numberCigs.removeEventListener('change', calculatePackYears);
+//    numberPacks.removeEventListener('change', calculatePackYears);
+   let totalYearsSpentSmoking = 0;
+   if (ageStartedSmoking.valueAsNumber) {
+    totalYearsSpentSmoking = patientAge.value - ageStartedSmoking.valueAsNumber;
+   } else if (yearsSpentSmoking.valueAsNumber) {
+    totalYearsSpentSmoking = yearsSpentSmoking.valueAsNumber;
+   }
+   smokingPackYearsP.innerHTML = `The patient has a ${totalYearsSpentSmoking*numberPacks.value}-pack-year history of smoking.`;
+   document.getElementById('smokinganalysis').innerHTML = smokingPackYearsP.innerHTML;
+}
+
+
+document.getElementById('smoking').addEventListener('click', ()=> {
+    if (SmokerCheckbox.checked) {
+        document.getElementById('smokingdatadiv').classList.toggle('hidden');
+    } else {
+        document.getElementById('smokingdatadiv').classList.toggle('hidden');
+    }
+});
+
+
 
 // CKD EPi Calculator 
 const patientAge = document.getElementById('patientage');
@@ -98,7 +210,23 @@ function translateCreatToGFR(e) {
     console.log(`A = ${A} and B = ${B} and the patient's sex is recorded here as ${patientsexmale.checked ? "M" : "F" }`);
     console.log(`The patient's GFR is = ${GFR.toFixed(2)}`);
     GFRinput.value = GFR.toFixed(2);
-   
+    document.getElementById('currentGFR').innerHTML = GFR.toFixed(2);
+    document.getElementById('currentcreatinine').innerHTML = Scr;
+    let CKDstage;
+    if (GFR > 91) {
+        CKDstage = 'The patient does not have significant kidney disease'
+    } else if (GFR <= 90 && GFR >60) {
+        CKDstage = 'The patient has stage 2 chronic kidney disease'
+    } else if (GFR <= 60 && GFR >45) {
+        CKDstage = 'The patient has stage 3A chronic kidney disease'
+    } else if (GFR <= 45 && GFR >30) {
+        CKDstage = 'The patient has stage 3B chronic kidney disease'
+    } else if (GFR <= 30 && GFR >15) {
+        CKDstage = 'The patient has stage 4 chronic kidney disease'
+    } else if (GFR <= 15) {
+        CKDstage = 'The patient has stage 5 chronic kidney disease'
+    }
+    document.getElementById('currentCKDstage').innerHTML = CKDstage;
     return GFR;
 }
 
@@ -122,7 +250,7 @@ const CholCheckBox = document.getElementById('takingcholmeds');
 
 
 const framinghamButtons = document.getElementsByClassName('framinghamcalc');
-for (i=0; i<framinghamButtons.length; i++) {
+for (let i=0; i<framinghamButtons.length; i++) {
     framinghamButtons[i].addEventListener('change', calculateFramingham);
 }
 
@@ -359,7 +487,7 @@ const patientDBP = document.getElementById('DBP');
 const patientPulse = document.getElementById('pulse');
 
 const BPInputButtons = document.getElementsByClassName('BPinput');
-for (i=0; i<BPInputButtons.length; i++) {
+for (let i=0; i<BPInputButtons.length; i++) {
     BPInputButtons[i].addEventListener('change', calculateBPValues)
 }
 
@@ -428,7 +556,7 @@ function calculateBPValues(e) {
 
 // Diabetes checkbox trigger
 
-A1CInput = document.getElementById('A1C');
+const A1CInput = document.getElementById('A1C');
 
 A1CInput.addEventListener('change', updateDMCheckBox);
 
@@ -436,15 +564,50 @@ function updateDMCheckBox(e) {
     e.preventDefault();
     if (A1CInput.value >= 6.5) {
         DMCheckbox.checked = true;
+        calculateBPValues()
+
     }
+}
+
+//Diabetes Analysis 
+
+const currentA1c = document.getElementById('currenta1c');
+const A1cAnalysis = document.getElementById('a1canalysis');
+
+A1CInput.addEventListener('change', updateCurrentA1C);
+
+function updateCurrentA1C(e) {
+    e.preventDefault();
+    currentA1c.innerHTML = A1CInput.value;
+    if (A1CInput.value < 6.5 && A1CInput.value >= 6.0 ) {
+        currentA1c.classList.add('riskColorLow');
+        currentA1c.classList.remove('riskColorModerate');
+        currentA1c.classList.remove('riskColorHigh');
+        A1cAnalysis.innerHTML = 'A1C is at or below target value. If the patient is not being treated for diabetes, they are currently pre-diabetic.'
+    } else if (A1CInput.value > 6.4 && A1CInput.value < 7.1 ) {
+        currentA1c.classList.remove('riskColorLow');
+        currentA1c.classList.add('riskColorModerate');
+        currentA1c.classList.remove('riskColorHigh');
+        A1cAnalysis.innerHTML = 'A1C is at or below target value. The patient has well-controlled diabetes.'
+    } else if (A1CInput.value >= 7.1) {
+        currentA1c.classList.remove('riskColorLow');
+        currentA1c.classList.remove('riskColorModerate');
+        currentA1c.classList.add('riskColorHigh');
+        A1cAnalysis.innerHTML = 'A1C is above target value. The patient may need a change in therapy.'
+} else if (A1CInput.value < 6.0 ) {
+        currentA1c.classList.add('riskColorLow');
+        currentA1c.classList.remove('riskColorModerate');
+        currentA1c.classList.remove('riskColorHigh');
+        A1cAnalysis.innerHTML = 'A1C is at or below target value. If the patient is not being treated for diabetes, they are currently not diabetic.'
+}
 }
 
 //Medication Section CSS and Display Logic
 
-antihypertensiveList = document.getElementById('antihypertensivelist');
-antihypertensiveListButton = document.getElementById('antihtbutton');
-medicationListItem = document.getElementsByClassName('medicationlistitem');
-for (i=0; i<medicationListItem.length; i++) {
+const antihypertensiveList = document.getElementById('antihypertensivelist');
+const antihypertensiveListButton = document.getElementById('antihtbutton');
+const medicationListItem = document.getElementsByClassName('medicationlistitem');
+for (let i=0; i<medicationListItem.length; i++) {
     medicationListItem[i].addEventListener('click', toggleSelectedStatus)
 };
 
@@ -453,49 +616,115 @@ function toggleSelectedStatus(e) {
     e.target.classList.toggle('selected');
 }
 
-
 antihypertensiveListButton.onclick = () => {
     antihypertensiveList.classList.toggle('visible');
     antihypertensiveList.classList.toggle('hidden');
 }
 
-antiDMlist = document.getElementById('antidmlist');
-antiDMListButton = document.getElementById('antidmbutton');
+const antiDMlist = document.getElementById('antidmlist');
+const antiDMListButton = document.getElementById('antidmbutton');
 
 antiDMListButton.onclick = () => {
     antiDMlist.classList.toggle('visible');
     antiDMlist.classList.toggle('hidden');
 }
 
-antiDlplist = document.getElementById('antidlplist');
-antiDlpListButton = document.getElementById('antidlpbutton');
+const antiDlplist = document.getElementById('antidlplist');
+const antiDlpListButton = document.getElementById('antidlpbutton');
 
 antiDlpListButton.onclick = () => {
     antiDlplist.classList.toggle('visible');
     antiDlplist.classList.toggle('hidden'); 
 }
 
-antiSmokinglist = document.getElementById('antismokinglist');
-antiSmokingListButton = document.getElementById('antismokingbutton');
+const antiSmokinglist = document.getElementById('antismokinglist');
+const antiSmokingListButton = document.getElementById('antismokingbutton');
 
 antiSmokingListButton.onclick = () => {
     antiSmokinglist.classList.toggle('visible');
     antiSmokinglist.classList.toggle('hidden'); 
 }
 
-antiPlateletlist = document.getElementById('antiplateletlist');
-antiPlateletListButton = document.getElementById('antiplateletbutton');
+const antiPlateletlist = document.getElementById('antiplateletlist');
+const antiPlateletListButton = document.getElementById('antiplateletbutton');
 
 antiPlateletListButton.onclick = () => {
     antiPlateletlist.classList.toggle('visible');
     antiPlateletlist.classList.toggle('hidden'); 
 }
 
+// Medication Section Add Note
+
+const addmedicationul=document.getElementById("addmedicationlist");
+
+
+document.getElementById("addmedications").addEventListener('keydown', addLiMed )
+
+function addLiMed(e) {
+    if (e.key === 'Enter'){
+        const inp=document.getElementById("addmedications");
+        if(inp.value==""){ 
+            alert("Please enter data");
+        } else {
+            addmedicationul.innerHTML+=`<li class="addli">${inp.value}<span class="removeli">\u00D7</span></li>`
+        inp.value=""
+        }
+    }
+  
+};
+
+
+addmedicationul.onclick=ev=>
+  ev.target.tagName=="SPAN" 
+  && ev.target.parentNode.tagName=="LI"
+  && ev.target.parentNode.remove();
+
+
+//Manipulation of the therapeutic option section
+const unselectedOptions = document.getElementsByClassName('unselectedoption');
+for (let i=0; i<unselectedOptions.length; i++){
+    unselectedOptions[i].addEventListener("click", toggleEmphasize)
+}
+
+function toggleEmphasize(e) {
+    e.preventDefault();
+    e.target.classList.toggle('unselectedoption')
+};
 
 
 
+// External JS module linkages
 
+const ACEIbutton = document.getElementById('ACEi');
+ACEIbutton.addEventListener('click', loadACEiList)
 
+function loadACEiList(e) {
+    ACEIbutton.appendChild(document.createElement('select'))
+        .setAttribute('id', 'ACEilist');
+        document.getElementById('ACEilist').classList.add('Rxselectoroption');
+    const ACEilist = document.getElementById('ACEilist');
+    ACEilist.appendChild(document.createElement("option"))
+        .setAttribute('id', 'perindoprillist')
+    document.getElementById('perindoprillist').innerHTML += 'Perindopril';
+    ACEilist.appendChild(document.createElement("option"))
+        .setAttribute('id', 'ramiprillist');
+        document.getElementById('ramiprillist').innerHTML += 'Ramipril';
+    ACEilist.appendChild(document.createElement("option"))
+        .setAttribute('id', 'trandolaprillist');
+        document.getElementById('trandolaprillist').innerHTML += 'Trandolapril';
+    ACEilist.appendChild(document.createElement("option"))
+        .setAttribute('id', 'quinaprillist');
+        document.getElementById('quinaprillist').innerHTML += 'Quinapril';
+    ACEilist.appendChild(document.createElement("option"))
+        .setAttribute('id', 'enalaprillist');
+        document.getElementById('enalaprillist').innerHTML += 'Enalapril';
+    ACEilist.appendChild(document.createElement("option"))
+        .setAttribute('id', 'fosinoprillist');
+        document.getElementById('fosinoprillist').innerHTML += 'Fosinopril';
+    ACEIbutton.removeEventListener('click', loadACEiList);
+    
+        // document.getElementById(`Perindopril${[i]}`).textContent = `Perindopril ${i**(i-1)}mg PO daily`
+    }
 
 
 

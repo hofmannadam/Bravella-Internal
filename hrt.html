@@ -1,0 +1,91 @@
+<!-- HRT analysis and Worksheet -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="./Resources/CSS/index.css" type="text/css" rel="stylesheet">
+        <title>Bravella Health HRT</title>
+    </head>
+    <body>
+        <header>
+            <h1>Internal-Facing Patient Worksheet</h1>
+            <h2>HRT Health Screen and Algorithm</h2>
+        </header>
+            <section id="patientidentification">
+                <h3>Patient Identification</h3>
+                <form>
+                    <label for="patientfirstname">First Name:</label>
+                    <input type="text" id="patientfirstname" name="patientfirstname"/><br>
+                    <label for="patientlastname">Last Name:</label>
+                    <input type="text" id="patientlastname" name="patientlastname"/><br>
+                    <label for="DOB">Date of Birth:</label>
+                    <input type="date" id="DOB" name="DOB"/><br>
+                    <label for="patientage">Age:</label>
+                    <input type="number" id="patientage" name="patientage" min="0" max="120" class="framinghamcalc"/><br>
+                    <label for="patientsex">Sex:</label>
+                    <input type="radio" id="patientsexfemale" name="patientsex" checked class="framinghamcalc" /> F <input type="radio" id="patientsexmale" name="patientsex" class="framinghamcalc"  /> M  <br>
+                    <label for="uniqueid">Unique ID:</label>
+                    <input type="text" id="uniqueid" name="uniqueid"/><br>
+                    <button id="patientidsubmission">Submit</button>
+                </form>
+                <br>
+            </section>
+
+            <main>
+                <section id="dataacquisition">
+                    <h3>Data Acquisition</h3>
+                    <h4>Indications</h4>
+                        <div>
+                            <ul style="text-decoration: underline"><strong>Primary Indications</strong>
+                                <li>Vasomotor Symptoms: </li> None <input type="radio" name="vasomotorcat"/> Mild <input type="radio" name="vasomotorcat"/> Moderate <input type="radio" name="vasomotorcat"/> Severe <input type="radio" name="vasomotorcat"/>
+                                <br>
+                                <li>Mood lability or depression</li>
+                                <li>Sleep disturbances related to mood or vasomotor</li>None <input type="radio" name="vasomotorcat"/> Mild <input type="radio" name="vasomotorcat"/> Moderate <input type="radio" name="vasomotorcat"/> Severe <input type="radio" name="vasomotorcat"/>
+                                <br>
+                                <li>Vulvovaginal atrophy or genitourinary symptoms</li>
+                            </ul>
+                            <p class="selectedoption" style="background-color: lightgray">GSM Screening Tool</p>
+                            <p class="selectedoption" style="background-color: lightgray">Depression and Anxiety Screening Tool</p>
+                            <ul style="text-decoration: underline"><strong>Secondary Indications</strong>
+                                <li>Osteoporosis</li>
+                                <li>CHD</li>
+                                <li>Family history of cognitive decline</li>
+                                <li>Non-specific joint pains</li>
+                            </ul>
+
+                        </div>
+                    <h4>Contraindications</h4>
+                        <div>
+                            <input type="checkbox" /> Age over 60? <br>
+                            <input type="checkbox" /> Within 10 years of FMP?<br>
+                            <input type="checkbox" /> Unexplained Vaginal Bleeding?<br>
+                            <input type="checkbox" /> Personal History of Breast Cancer or Endometrial Cancer? <br>
+                            <input type="checkbox" /> Personal History of Coronary Heart Disease? <br>
+                            <input type="checkbox" /> Personal History of Venous Thromboembolism? <br>
+                            <input type="checkbox" /> Personal History of Stroke or TIA? <br>
+                            <input type="checkbox" /> Personal History of Cirrhosis or active liver disease? <br>
+
+                            <p class="selectedoption" style="background-color: lightgray">Framingham Risk Calculator</p>
+                            <p class="selectedoption" style="background-color: lightgray">Breast Cancer Risk Calculator</p>
+
+
+                        </div>
+                        <div>
+                            <h3>Analysis Section</h3>
+                                <h4>HRT</h4>
+                                <p>Safety and Indication Analysis</p>
+                                <p>Therapeutic Modality</p>
+                                    <ul>
+                                        <li>Oral HRT</li>
+                                        <li>Transdermal HRT</li>
+                                        <li>Vaginal Estrogen</li>
+                                        <li>Non HRT symptomatic therapy</li>
+                                        <li>Alternative or complimentary therapies</li>
+                                    </ul>
+                        </div>
+                </section>
+            </main>
+            <footer>
+                
+            </footer>

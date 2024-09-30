@@ -1,0 +1,141 @@
+<!-- Osteoporosis analysis and Worksheet -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="./Resources/CSS/index.css" type="text/css" rel="stylesheet">
+        <title>Bravella Health HRT</title>
+    </head>
+    <body>
+        <header>
+            <h1>Internal-Facing Patient Worksheet</h1>
+            <h2>Bone and Osteoporosis Health Screen and Algorithm</h2>
+        </header>
+    <main>
+       
+            <section id="patientidentification">
+                <h2>Patient Identification</h2>
+                <form>
+                    <label for="patientfirstname">First Name:</label>
+                    <input type="text" id="patientfirstname" name="patientfirstname"/><br>
+                    <label for="patientlastname">Last Name:</label>
+                    <input type="text" id="patientlastname" name="patientlastname"/><br>
+                    <label for="DOB">Date of Birth:</label>
+                    <input type="date" id="DOB" name="DOB"/><br>
+                    <label for="patientage">Age:</label>
+                    <input type="number" id="patientage" name="patientage" min="0" max="120" /><br>
+                    <label for="patientsex">Sex:</label>
+                    <input type="radio" id="patientsexfemale" name="patientsex" class="patientSexCheckbox" checked  /> F <input type="radio" id="patientsexmale" name="patientsex" class="patientSexCheckbox"   /> M  <br>
+                    <label for="uniqueid">Unique ID:</label>
+                    <input type="text" id="uniqueid" name="uniqueid"/><br>
+                    <button id="patientidsubmission">Submit</button>
+                </form>
+                <br>
+                <div id="longTermInfo">
+
+
+                </div>
+            </section>
+      
+        <section>
+            <h2>History and Questionnaire</h2>
+            <input type="checkbox" id="fragilityFracture" name="fragilityFracture" /><label for="fragilityFracture">Has the patient had a fragility fracture?</label> <br>
+            <p>Tooltip: Fragility fractures are those occurring spontaneously or from minor trauma (eg, a fall from a standing height or less). The most common sites of fragility fracture are the spine (vertebral compression fractures), hip, and wrist. Fragility fractures also occur at the humerus, rib, and pelvis.</p>
+            <input type="checkbox" id="fallRisk" name="fallRisk" /><label for="fallRisk">Has the patient had 2 or more falls in the past year?</label>  <br>
+            <input type="checkbox" id="corticosteroidUse" name="corticosteroidUse" /><label for="corticosteroidUse">Has the patient used at least 5mg of prednisone for at least three months in the past year?</label>  <br>
+            <input type="checkbox" id="familyHistory" name="familyHistory" /><label for="familyHistory">Does the patient have a parent who has suffered a hip fracture?</label>  <br>
+            <input type="checkbox" id="BMIcutoff" name="BMI" /><label for="BMI">Patient BMI less than or equal to 20?</label>  <br>
+
+            <input type="number" id="htInCm" class="BMICalcEvent" /> Patient height in cm <input type="number" id="htInIn" class="BMICalcEvent" /> Patient height in inches <br>
+            <input type="number" id="wtInKg" class="BMICalcEvent"/> Patient weight in kg <input type="number" id="wtInLbs" class="BMICalcEvent" /> Patient weight in lbs <br>
+            <label for="BMIvalue">Patient BMI:</label><input type="number" id="BMIvalue" name="BMIvalue" />  <br>
+            <input type="checkbox" id="currentSmoking" name="currentSmoking" /><label for="currentSmoking">Is the patient a current/active smoker?</label>  <br>
+            <input type="checkbox" id="currentAlcohol" name="currentAlcohol" /><label for="currentAlcohol">Does the patient have 3 or more alcoholic drinks per day?</label>  <br>
+
+
+            
+            <input type="checkbox" id="SecondaryOP" name="SecondaryOP" /><label for="SecondaryOP">Does the patient have diseases which may cause accelerated or secondary osteoporosis, such as hyperparathyroidism, multiple myeloma or rheumatoid arthritis?</label><br>
+            <p><a href="https://frax.shef.ac.uk/FRAX/tool.aspx?country=9" target="_blank" >Frax Calculator - Print and Save PDF to file once completed</a></p>
+
+        </section>
+        <section>
+            <h2>Objective Data and Measurement</h2>
+            <h3>Physical Exam</h3>
+            <label for="OWD5cm">Occiput-Wall Distance greater than 5cm?</label><input type="radio" name="OWD5cm" id="OWD5cmYes"> Yes <input type="radio" name="OWD5cm" id="OWD5cmNo" checked > No <br>
+            <label for="heightLoss">Historical loss of height greater than 6cm?</label><input type="radio" name="heightLoss" id="heightLossYes"> Yes <input type="radio" name="heightLoss" id="heightLossNo" checked> No <br>
+            <label for="ribToPelvisDistance">Midaxillary rib-to-pelvis distance less than or equal to 2 finger-breadths?</label><input type="radio" name="ribToPelvisDistance" id="ribToPelvisDistanceYes"> Yes <input type="radio" name="ribToPelvisDistance" id="ribToPelvisDistanceNo" checked> No <br>
+
+            <h3>Laboratory Data</h3>
+            <label for="PTHi">Parathyroid Hormone: </label><input type="text" id="PTHi" name="PTHi"/> <br>
+            <label for="vitaminD">Vitamin D OH, 25: </label><input type="text" id="vitaminD" name="vitaminD"/> <br>
+            <label for="calcium">Calcium: </label><input type="text" id="calcium" name="calcium"/> <label for="phosphate">Phosphate: </label><input type="text" id="phosphate" name="phosphate"/> <br>
+            <label for="creatinine">Creatinine: </label><input type="text" id="creatinine" name="creatinine" placeholder="Input Creat to automatically calculate GFR"/>  <label for="GFR">GFR: </label><input type="text" id="GFR" name="GFR"/> <br>
+            <label for="TSH">TSH: </label><input type="text" id="TSH" name="TSH"/> <br>
+
+            <h2>Imaging</h2>
+            <label>Has a DEXA test been performed in the past 5 years?</label><input type="radio" id="DEXAPerformed" name="DEXAPerformed" /> Yes <input type="radio" id="DEXANotPerformed" name="DEXAPerformed" checked> No or Unknown <br>
+            <div id="DEXAInfo" class="hidden"> 
+                <label for="dateLastDEXA"></label>Year of last DEXA<input type="text" name="yearLastDEXA" placeholder="yyyy" /><label for="dateLastDEXA"></label>Month of last DEXA<input type="text" name="monthLastDEXA" placeholder="mm" /><br>
+                <input type="radio" id="DEXAScoreOP" name="DEXAScore" /><label for="DEXAScore">DEXA T-score less than 2.4 at lumbar spine, hip, or femoral neck</label><br>
+                <input type="radio" id="DEXAScoreLowBMD" name="DEXAScore" /><label for="DEXAScore">DEXA T-score between -2.5 and -1.0 at lumbar spine, hip, or femoral neck</label><br>
+                <input type="radio" id="DEXAScoreNormalBMD" name="DEXAScore" /><label for="DEXAScore">DEXA T-score greater than -1.0 at lumbar spine, hip, or femoral neck</label><br>
+            </div>
+       
+        </section>
+        <section>
+            <h2>Analysis and Plan</h2>
+                <h3>Address Risk Factors:</h3>
+                    <p>Falls</p>
+                    <p>Low BMI</p>
+                    <p>Smoking</p>
+                    <p>Alcohol Consumption</p>
+                    <p>Referral for Management of Causes of Secondary Osteoporosis</p>
+                    <br>
+                    <p>Number of High-Risk Clinical Features: <span>INNER HTML NUMBER OF HIGH RISK FEATURES</span></p>
+                <h3>Order Paraclinical Testing:</h3>
+                    <p>Blood Tests</p>
+                         <p>Initial blood tests: CBC, Creatinine, Ca, PO4, Vitamin D 25,OH, TSH</p> <br>
+                         <p>Secondary blood tests:</p>
+                            <input type="checkbox" /> <label>Unexplained anemia</label>
+                            <ol>
+                                <li>serum and urine protein electrophoresis</li>
+                                <li>celiac disease screen with anti-TTG and serum immunoglobulins</li>
+                            </ol>
+                            <input type="checkbox" /> <label>Unexplained vitamin D deficiency</label>
+                            <ol>
+                                <li>celiac disease screen with anti-TTG and serum immunoglobulins</li>
+                            </ol>
+                            <input type="checkbox" /> <label>Hypercalcemia</label>
+                            <ol>
+                                <li>serum and urine protein electrophoresis</li>
+                                <li>Parathyroid hormone</li>
+                            </ol>
+                         
+                    <p>Imaging</p>
+                            <p>DEXA nuclear medicine bone densitometry</p>
+                            <ul>
+                                <li>Initial imaging in high-risk patient between 50-69 years old, or patient older than 70 years old</li>
+                                <li>Follow-up study in patient with primary osteoporosis, three years after initial study</li>
+                                <li>Follow-up study in patient with accelerated bone loss or secondary osteoporosis, at interval: <input type="text" /></li>
+                            </ul>
+                <h3>Pharmacotherapy</h3>
+                    <p>Bisphosphonates</p>
+                    <p>Vitamin D</p>
+                    <p>Calcium</p>
+                    <p>Denosumab / Prolia</p>
+                    <p>Candidate for HRT</p>
+                    <p>Anabolic Treatments</p>
+        </section>
+        <section>
+            <h2>Follow-up</h2>
+                <p>Patient Stable - See in 1 year</p>
+                <p>Imaging, or Blood Test to Follow-up. Interval:</p>
+        </section>
+    </main>
+    <footer>
+        <p><a href="https://www.cmaj.ca/content/195/39/E1333">Canadian Osteoporosis Guidelines 2023</a></p>
+            <script type="module" src="./Resources/JS/Osteoporosis.js"></script>
+            <script type="module" src="./Resources/JS/Supporting JS/toggleHiddenCheckBox.js"></script>
+            <script type="module" src="./Resources/JS/Supporting JS/CKDEpiGFRCalculator.js"></script>
+    </footer>
